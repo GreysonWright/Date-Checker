@@ -1,0 +1,2 @@
+c:\users\administrator\documents\visual studio 2015\Projects\Date Check Tool\Date Check Tool\bin\Debug\Date Check Tool.exe.config
+C:\Users\Administrator\Documents\Visual Studio 2015\Projects\date-check\Date Check Tool\Date Check Tool\bin\Debug\Date Check Tool.exe.config
