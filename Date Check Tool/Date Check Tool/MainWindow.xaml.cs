@@ -1,19 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows;
 using Microsoft.Win32;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Resources;
 using System.ComponentModel;
 using System.Data;
 using System.IO;
@@ -27,17 +14,20 @@ namespace Date_Check_Tool
     {
         
         BackgroundWorker backgroundWorker;
-        ProgressDialog progressDialog;
         string currentProcess;
         string filePath;
         string tableName;
         bool errorPresented = false;
-        bool shouldClose = false;
+        bool shouldClose = true;
         int errorCount;
 
         public MainWindow()
         {
             InitializeComponent();
+
+            tableComboBox.Items.Add("Select Table...");
+            tableComboBox.Text = "Select Table...";
+
         }
 
         private string[] getBadDates()
@@ -147,15 +137,25 @@ namespace Date_Check_Tool
         private void goButton_Click(object sender, RoutedEventArgs e)
         {
 
-            tableName = tableComboBox.Text;
-            progressDialog = new ProgressDialog();
-            backgroundWorker = new BackgroundWorker();
-            backgroundWorker.WorkerReportsProgress = true;
-            backgroundWorker.WorkerSupportsCancellation = true;
-            backgroundWorker.DoWork += backgroundWorker_DoWork;
-            backgroundWorker.RunWorkerCompleted += backgroundWorker_RunWorkerCompleted;
-            backgroundWorker.ProgressChanged += backgroundWorker_ProgressChanged;
-            backgroundWorker.RunWorkerAsync(tableComboBox.Text); //Start background worker
+            if (filePath != null && tableComboBox.Text != "Select table...")
+            {
+
+                shouldClose = false;
+                tableName = tableComboBox.Text;
+                backgroundWorker = new BackgroundWorker();
+                backgroundWorker.WorkerReportsProgress = true;
+                backgroundWorker.WorkerSupportsCancellation = true;
+                backgroundWorker.DoWork += backgroundWorker_DoWork;
+                backgroundWorker.RunWorkerCompleted += backgroundWorker_RunWorkerCompleted;
+                backgroundWorker.RunWorkerAsync(tableComboBox.Text); //Start background worker
+
+            }
+            else
+            {
+
+                MessageBox.Show("Select a link table before proceeding.");
+
+            }
 
         }
 
@@ -187,7 +187,6 @@ namespace Date_Check_Tool
         {
 
             shouldClose = true; //The user now has permission to kill date pop so don't get mad
-            progressDialog.closeDialog(); //Progress dialog should go away we don't need it anymore
             Dispatcher.Invoke(() => { //We have to invoke this other stuff because its crossthreaded
 
                 if (errorCount > 0)
@@ -198,15 +197,7 @@ namespace Date_Check_Tool
             });
 
         }
-
-        //Fired when backgroundworker.reportProgress is called
-        private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-
-            progressDialog.setProgress(e.ProgressPercentage, currentProcess); //Sets the progress of the progress bar
-
-        }
-
+        
         //#--DB Tools--#
         //Fired when the progress changes (gives us access to the background worker from inside dbtools)
         public void dbTools_ProgressUpdated(object sender, DBToolsProgressUpdatedEventArgs e)
@@ -236,6 +227,13 @@ namespace Date_Check_Tool
                 }
 
             });
+
+        }
+
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+
+            e.Cancel = !shouldClose;
 
         }
 

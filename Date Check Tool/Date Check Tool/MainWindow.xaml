@@ -5,12 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Date_Check_Tool"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        <Button x:Name="browseButton" Content="Browse" HorizontalAlignment="Left" Margin="215,116,0,0" VerticalAlignment="Top" Width="75" Click="browseButton_Click"/>
-        <Button x:Name="goButton" Content="Go" HorizontalAlignment="Left" Margin="215,246,0,0" VerticalAlignment="Top" Width="75" Click="goButton_Click"/>
-        <ComboBox x:Name="tableComboBox" HorizontalAlignment="Left" Margin="196,181,0,0" VerticalAlignment="Top" Width="120"/>
-        <Label x:Name="nameLabel" Content="Label" HorizontalAlignment="Left" Margin="232,150,0,0" VerticalAlignment="Top"/>
+        Title="MainWindow" Height="240" Width="240" Closing="Window_Closing" Background="#FF3F51B5" ResizeMode="NoResize">
+    <Grid Height="202" Width="234">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="browseButton" Content="Browse" Margin="78,10,78,0" VerticalAlignment="Top" Click="browseButton_Click" Height="78" Foreground="White"/>
+        <Button x:Name="goButton" Content="Go" Margin="75,170,75,10" Click="goButton_Click" Foreground="White" Height="22" Width="84"/>
+        <ComboBox x:Name="tableComboBox" Margin="39,139,39,0" VerticalAlignment="Top" Style="{StaticResource {x:Static ToolBar.ComboBoxStyleKey}}" Background="White" BorderBrush="White" Foreground="Black" HorizontalAlignment="Stretch" Height="20"/>
+        <Label x:Name="nameLabel" Content="Open a link file." Margin="0,98,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" Foreground="White" Background="#FF394AA8" Height="30"/>
 
     </Grid>
 </Window>

@@ -13,5 +13,4 @@ C:\Users\Administrator\Documents\Visual Studio 2015\Projects\date-check\Date Che
 C:\Users\Administrator\Documents\Visual Studio 2015\Projects\date-check\Date Check Tool\Date Check Tool\obj\Debug\Date Check Tool.csproj.GenerateResource.Cache
 C:\Users\Administrator\Documents\Visual Studio 2015\Projects\date-check\Date Check Tool\Date Check Tool\obj\Debug\Date Check Tool.exe
 C:\Users\Administrator\Documents\Visual Studio 2015\Projects\date-check\Date Check Tool\Date Check Tool\obj\Debug\Date Check Tool.pdb
-C:\Users\Administrator\Documents\Visual Studio 2015\Projects\date-check\Date Check Tool\Date Check Tool\obj\Debug\ProgressDialog.g.cs
-C:\Users\Administrator\Documents\Visual Studio 2015\Projects\date-check\Date Check Tool\Date Check Tool\obj\Debug\ProgressDialog.baml
+C:\Users\Administrator\Documents\Visual Studio 2015\Projects\date-check\Date Check Tool\Date Check Tool\obj\Debug\App.baml
