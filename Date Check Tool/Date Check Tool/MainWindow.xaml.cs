@@ -33,6 +33,7 @@ namespace Date_Check_Tool
         string tableName;
         bool errorPresented = false;
         bool shouldClose = false;
+        int errorCount;
 
         public MainWindow()
         {
@@ -53,42 +54,62 @@ namespace Date_Check_Tool
             for (int i = 0; i < table.Rows.Count; i++)
             {
                 
-                string recordCreated = table.Rows[i].ItemArray[13].ToString();
-                string recordHistoric = table.Rows[i].ItemArray[14].ToString();
-                string startValid = table.Rows[i].ItemArray[15].ToString();
-                string endValid = table.Rows[i].ItemArray[16].ToString();
+                string recordCreated = table.Rows[i].ItemArray[12].ToString();
+                string recordHistoric = table.Rows[i].ItemArray[13].ToString();
+                string startValid = table.Rows[i].ItemArray[14].ToString();
+                string endValid = table.Rows[i].ItemArray[15].ToString();
+                int localErrorCount = 0;
 
-                writeContents.Add("Row " + (i + 1) + "{");
+                writeContents.Add("Row " + (i + 1) + " {");
 
                 if (string.IsNullOrEmpty(recordHistoric) && !string.IsNullOrEmpty(endValid))
                 {
                     
-                    writeContents.Add("\tThere is no Record Historic for the End Valid");
+                    writeContents.Add("    There is no Record Historic for End Valid");
+                    errorCount++;
+                    localErrorCount++;
 
                 }
 
                 if (DateTools.getLaterDate(endValid, startValid) == startValid)
                 {
                                         
-                    writeContents.Add("\tThe Start Valid is more recent than the End Valid");
+                    writeContents.Add("    Start Valid is more recent than End Valid");
+                    errorCount++;
+                    localErrorCount++;
 
                 }
 
-                if (DateTools.getLaterDate(recordHistoric, startValid) == recordHistoric)
+                if (DateTools.getLaterDate(recordHistoric, startValid) == startValid)
                 {
 
-                    writeContents.Add("\tThe Start Valid is more recent than the Record Historic");
+                    writeContents.Add("    Start Valid is more recent than Record Historic");
+                    errorCount++;
+                    localErrorCount++;
 
                 }
 
                 if (DateTools.getLaterDate(recordCreated, startValid) == startValid)
                 {
 
-                    writeContents.Add("\tThe Start Valid is more recent than the Record Created");
+                    writeContents.Add("    Start Valid is more recent than Record Created");
+                    errorCount++;
+                    localErrorCount++;
 
                 }
 
-                writeContents.Add("}\n");
+                if (localErrorCount == 0)
+                {
+
+                    writeContents.RemoveAt(writeContents.Count - 1);
+
+                }
+                else
+                {
+
+                    writeContents.Add("}\n");
+
+                }
 
             }
 
@@ -144,15 +165,21 @@ namespace Date_Check_Tool
         {
 
             string[] writeContents = getBadDates();
-            StreamWriter streamWriter = new StreamWriter("output.txt");
-
-            foreach (string line in writeContents)
+            using (StreamWriter streamWriter = new StreamWriter("output.txt"))
             {
+                if (errorCount > 0)
+                {
 
-                streamWriter.WriteLine(line + "\n");
+                    for (int i = 0; i < writeContents.Length; i++)
+                    {
+
+                        streamWriter.WriteLine(writeContents[i]);
+
+                    }
+
+                }
 
             }
-            
         }
 
         //Fired when backgroundWorker is done
@@ -162,13 +189,11 @@ namespace Date_Check_Tool
             shouldClose = true; //The user now has permission to kill date pop so don't get mad
             progressDialog.closeDialog(); //Progress dialog should go away we don't need it anymore
             Dispatcher.Invoke(() => { //We have to invoke this other stuff because its crossthreaded
-                
-                if (MessageBox.Show("The Date Population tool is finished and has updated the \"" + tableComboBox + "\" table in" + "\"" + filePath + "\". Would you like to open the file now?", "", MessageBoxButton.YesNo, MessageBoxImage.Exclamation) == MessageBoxResult.Yes) //Check if user wants to open the file we wrote the dates to
-                {
 
-                    System.Diagnostics.Process.Start("msaccess.exe", "\"" + filePath + "\""); //This is a great way to open the file so that access doesnt close when we do 
+                if (errorCount > 0)
+                    System.Diagnostics.Process.Start("notepad.exe", "output.txt"); //Opens the text file in notepad
 
-                }
+                MessageBox.Show("The Date Check Tool finished and found " + errorCount + " errors.");
 
             });
 
