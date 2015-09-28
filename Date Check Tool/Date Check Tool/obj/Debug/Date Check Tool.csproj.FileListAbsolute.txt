@@ -14,3 +14,22 @@ C:\Users\Administrator\Documents\Visual Studio 2015\Projects\date-check\Date Che
 C:\Users\Administrator\Documents\Visual Studio 2015\Projects\date-check\Date Check Tool\Date Check Tool\obj\Debug\Date Check Tool.exe
 C:\Users\Administrator\Documents\Visual Studio 2015\Projects\date-check\Date Check Tool\Date Check Tool\obj\Debug\Date Check Tool.pdb
 C:\Users\Administrator\Documents\Visual Studio 2015\Projects\date-check\Date Check Tool\Date Check Tool\obj\Debug\App.baml
+C:\Users\gwright\GIT\date-check\Date Check Tool\Date Check Tool\bin\Debug\Date Check Tool.exe.config
+C:\Users\gwright\GIT\date-check\Date Check Tool\Date Check Tool\bin\Debug\Date Check Tool.exe.manifest
+C:\Users\gwright\GIT\date-check\Date Check Tool\Date Check Tool\bin\Debug\Date Check Tool.application
+C:\Users\gwright\GIT\date-check\Date Check Tool\Date Check Tool\bin\Debug\Date Check Tool.exe
+C:\Users\gwright\GIT\date-check\Date Check Tool\Date Check Tool\bin\Debug\Date Check Tool.pdb
+C:\Users\gwright\GIT\date-check\Date Check Tool\Date Check Tool\obj\Debug\Date Check Tool.csprojResolveAssemblyReference.cache
+C:\Users\gwright\GIT\date-check\Date Check Tool\Date Check Tool\obj\Debug\MainWindow.g.cs
+C:\Users\gwright\GIT\date-check\Date Check Tool\Date Check Tool\obj\Debug\App.g.cs
+C:\Users\gwright\GIT\date-check\Date Check Tool\Date Check Tool\obj\Debug\Date Check Tool_MarkupCompile.cache
+C:\Users\gwright\GIT\date-check\Date Check Tool\Date Check Tool\obj\Debug\Date Check Tool_MarkupCompile.lref
+C:\Users\gwright\GIT\date-check\Date Check Tool\Date Check Tool\obj\Debug\App.baml
+C:\Users\gwright\GIT\date-check\Date Check Tool\Date Check Tool\obj\Debug\MainWindow.baml
+C:\Users\gwright\GIT\date-check\Date Check Tool\Date Check Tool\obj\Debug\Date Check Tool.g.resources
+C:\Users\gwright\GIT\date-check\Date Check Tool\Date Check Tool\obj\Debug\Date_Check_Tool.Properties.Resources.resources
+C:\Users\gwright\GIT\date-check\Date Check Tool\Date Check Tool\obj\Debug\Date Check Tool.csproj.GenerateResource.Cache
+C:\Users\gwright\GIT\date-check\Date Check Tool\Date Check Tool\obj\Debug\Date Check Tool.exe.manifest
+C:\Users\gwright\GIT\date-check\Date Check Tool\Date Check Tool\obj\Debug\Date Check Tool.application
+C:\Users\gwright\GIT\date-check\Date Check Tool\Date Check Tool\obj\Debug\Date Check Tool.exe
+C:\Users\gwright\GIT\date-check\Date Check Tool\Date Check Tool\obj\Debug\Date Check Tool.pdb
