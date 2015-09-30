@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Date_Check_Tool"
         mc:Ignorable="d"
-        Title="MainWindow" Height="240" Width="240" Closing="Window_Closing" Background="#FF3F51B5" ResizeMode="NoResize">
+        Title="Date Check" Height="240" Width="240" Closing="Window_Closing" Background="#FF3F51B5" ResizeMode="NoResize">
     <Grid Height="202" Width="234">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
