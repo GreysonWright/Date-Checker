@@ -15,9 +15,9 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>Z:\New Programs\DateCheck\</PublishUrl>
+    <PublishUrl>Z:\New Programs\Updates\DateCheck1.0\</PublishUrl>
     <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
+    <InstallFrom>Unc</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateMode>Foreground</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
@@ -25,10 +25,11 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
+    <InstallUrl>\\SER3000-6\Wisconsin Link Link\Link_Link\New Programs\DateCheck\</InstallUrl>
     <UpdateUrl>\\SER3000-06\Wisconsin Link Link\Link_Link\New Programs\Updates\DateCheck1.0\</UpdateUrl>
     <ProductName>Date Checker</ProductName>
     <PublisherName>Greyson Wright</PublisherName>
-    <ApplicationRevision>3</ApplicationRevision>
+    <ApplicationRevision>4</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
