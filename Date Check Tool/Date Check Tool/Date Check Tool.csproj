@@ -26,7 +26,9 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <UpdateUrl>\\SER3000-06\Wisconsin Link Link\Link_Link\New Programs\Updates\DateCheck1.0\</UpdateUrl>
-    <ApplicationRevision>1</ApplicationRevision>
+    <ProductName>Date Checker</ProductName>
+    <PublisherName>Greyson Wright</PublisherName>
+    <ApplicationRevision>2</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
