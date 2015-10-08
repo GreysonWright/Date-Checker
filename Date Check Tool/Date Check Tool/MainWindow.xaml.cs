@@ -8,6 +8,7 @@ using Microsoft.Win32;
 using System.ComponentModel;
 using System.Data;
 using System.IO;
+using System;
 
 namespace Date_Check_Tool
 {
@@ -73,7 +74,7 @@ namespace Date_Check_Tool
                 {
                     
                     writeContents.Add("    There is no Record Historic for End Valid");
-                    errorCount++;
+                    //errorCount++;
                     localErrorCount++;
 
                 }
@@ -82,7 +83,7 @@ namespace Date_Check_Tool
                 {
                                         
                     writeContents.Add("    Start Valid is more recent than End Valid"); //End valid is earlier than the start valid
-                    errorCount++;
+                    //errorCount++;
                     localErrorCount++;
 
                 }
@@ -91,7 +92,7 @@ namespace Date_Check_Tool
                 {
 
                     writeContents.Add("    Start Valid is more recent than Record Historic");
-                    errorCount++;
+                    //errorCount++;
                     localErrorCount++;
 
                 }
@@ -100,7 +101,7 @@ namespace Date_Check_Tool
                 {
 
                     writeContents.Add("    Start Valid is more recent than Record Created");
-                    errorCount++;
+                    //errorCount++;
                     localErrorCount++;
 
                 }
@@ -114,6 +115,7 @@ namespace Date_Check_Tool
                 else //If we have local errors close it off with a brace and a new line
                 {
 
+                    errorCount += localErrorCount; //Keep track of all errors
                     writeContents.Add("}\n"); 
 
                 }
@@ -208,8 +210,11 @@ namespace Date_Check_Tool
 
                 MessageBox.Show("The Date Check Tool finished and found " + errorCount + " errors.");
 
+
                 if (errorCount > 0) //Don't worrry about opening the file unless we have errors
                     System.Diagnostics.Process.Start("notepad.exe", "output.txt"); //Opens the text file in notepad
+
+                errorCount = 0;
 
             });
 
