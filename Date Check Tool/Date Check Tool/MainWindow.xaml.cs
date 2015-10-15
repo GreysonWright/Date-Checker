@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Data;
 using System.IO;
 using System;
+using System.Linq;
 
 namespace Date_Check_Tool
 {
@@ -42,6 +43,7 @@ namespace Date_Check_Tool
         {
 
             DataTable table;
+            List<string> errorTypeCount = new List<string>();
             List<string> writeContents = new List<string>();               
 
             DataBaseTools dbTools = new DataBaseTools();
@@ -56,6 +58,7 @@ namespace Date_Check_Tool
             string startValid;
             string endValid;
             int localErrorCount; //Local errorCount keeps up with errors per row while errorCount is total erros over the whole file the error count is displayed once date check is done
+            int[] errors = { 0, 0, 0, 0 };
 
             for (int i = 0; i < table.Rows.Count; i++)
             {
@@ -73,8 +76,8 @@ namespace Date_Check_Tool
                 if (string.IsNullOrEmpty(recordHistoric) && !string.IsNullOrEmpty(endValid)) //No end valid date for record historic
                 {
                     
-                    writeContents.Add("    There is no Record Historic for End Valid");
-                    //errorCount++;
+                    writeContents.Add(Environment.NewLine + "    There is no Record Historic for End Valid (" + endValid + ")" + Environment.NewLine);
+                    errors[0]++;
                     localErrorCount++;
 
                 }
@@ -82,8 +85,8 @@ namespace Date_Check_Tool
                 if (DateTools.getLaterDate(endValid, startValid) == startValid)
                 {
                                         
-                    writeContents.Add("    Start Valid is more recent than End Valid"); //End valid is earlier than the start valid
-                    //errorCount++;
+                    writeContents.Add(Environment.NewLine + "    Start Valid is more recent than End Valid (" + endValid + ")" + Environment.NewLine); //End valid is earlier than the start valid
+                    errors[1]++;
                     localErrorCount++;
 
                 }
@@ -91,8 +94,8 @@ namespace Date_Check_Tool
                 if (DateTools.getLaterDate(recordHistoric, startValid) == startValid) //Start valid is more recent than record historic
                 {
 
-                    writeContents.Add("    Start Valid is more recent than Record Historic");
-                    //errorCount++;
+                    writeContents.Add(Environment.NewLine + "    Start Valid is more recent than Record Historic" + Environment.NewLine);
+                    errors[2]++;
                     localErrorCount++;
 
                 }
@@ -100,8 +103,8 @@ namespace Date_Check_Tool
                 if (DateTools.getLaterDate(recordCreated, startValid) == startValid) //Start valid is more recent than record created
                 {
 
-                    writeContents.Add("    Start Valid is more recent than Record Created");
-                    //errorCount++;
+                    writeContents.Add(Environment.NewLine + "    Start Valid is more recent than Record Created" + Environment.NewLine);
+                    errors[3]++;
                     localErrorCount++;
 
                 }
@@ -122,7 +125,12 @@ namespace Date_Check_Tool
 
             }
 
-            return writeContents.ToArray(); //Return array of lines
+            errorTypeCount.Add("Error types:\nThere is no Record Historic for End Valid: " + errors[0] + "\n");
+            errorTypeCount.Add("Start Valid is more recent than End Valid: " + errors[1] + "\n");
+            errorTypeCount.Add("Start Valid is more recent than Record Historic: " + errors[2] + "\n");
+            errorTypeCount.Add("Start Valid is more recent than Record Created: " + errors[3] + "\n" + Environment.NewLine);
+
+            return errorTypeCount.ToArray().Concat(writeContents.ToArray()).ToArray(); //Return array of lines
 
         }
 
