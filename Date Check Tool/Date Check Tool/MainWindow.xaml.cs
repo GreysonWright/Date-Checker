@@ -20,7 +20,8 @@ namespace Date_Check_Tool
     {
         
         //Global variables bother me
-        BackgroundWorker backgroundWorker; 
+        BackgroundWorker backgroundWorker;
+        DataTable outTable;
         string currentProcess;
         string filePath;
         string tableName;
@@ -43,8 +44,10 @@ namespace Date_Check_Tool
         {
 
             DataTable table;
+            outTable = new DataTable();
             List<string> errorTypeCount = new List<string>();
-            List<string> writeContents = new List<string>();               
+            List<string> writeContents = new List<string>();
+            string[] columNames = {"STNID", "WISLRID", "END_VALID", "START_VALID"};        
 
             DataBaseTools dbTools = new DataBaseTools();
             dbTools.progressUpdated += dbTools_ProgressUpdated;
@@ -60,6 +63,13 @@ namespace Date_Check_Tool
             int localErrorCount; //Local errorCount keeps up with errors per row while errorCount is total erros over the whole file the error count is displayed once date check is done
             int[] errors = { 0, 0, 0, 0 };
 
+            foreach (string name in columNames)
+            {
+
+                outTable.Columns.Add(name);
+
+            }
+            
             for (int i = 0; i < table.Rows.Count; i++)
             {
 
@@ -119,7 +129,14 @@ namespace Date_Check_Tool
                 {
 
                     errorCount += localErrorCount; //Keep track of all errors
-                    writeContents.Add("}\n"); 
+                    writeContents.Add("}\n");
+
+                    DataRow currentRow = outTable.NewRow();
+                    currentRow["STNID"] = stnId;
+                    currentRow["WISLRID"] = stnId;
+                    currentRow["END_VALID"] = endValid;
+                    currentRow["START_VALID"] = startValid;
+                    outTable.Rows.Add(currentRow);
 
                 }
 
@@ -220,7 +237,15 @@ namespace Date_Check_Tool
 
 
                 if (errorCount > 0) //Don't worrry about opening the file unless we have errors
+                {
+
+                    DataBaseTools dbTools = new DataBaseTools();
+                    dbTools.writeToTable(outTable, filePath);
+
+                    System.Diagnostics.Process.Start("msaccess.exe", filePath); //Opens the text file in notepad
                     System.Diagnostics.Process.Start("notepad.exe", "output.txt"); //Opens the text file in notepad
+
+                }
 
                 errorCount = 0;
 

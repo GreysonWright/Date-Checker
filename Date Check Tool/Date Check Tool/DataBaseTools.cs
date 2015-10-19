@@ -213,7 +213,43 @@ namespace Date_Check_Tool
             }
 
         }
-             
+
+        public void writeToTable(DataTable table, string filePath)
+        {
+
+            using (OleDbConnection connection = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + filePath))
+            using (OleDbCommand createCommand = new OleDbCommand("CREATE TABLE [Date_Errors]([STNID] number, [WISLRID] number, [START_VALID] text, [END_VALID] text)", connection))
+            using (OleDbCommand deleteCommand = new OleDbCommand("DROP TABLE [Date_Errors]", connection))
+            using (OleDbDataAdapter dataAdapter = new OleDbDataAdapter("Select *FROM [Date_Errors]", "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + filePath))
+            using (OleDbCommandBuilder commandBuilder = new OleDbCommandBuilder(dataAdapter))
+            {
+                Console.WriteLine("rows" + table.Rows.Count);
+                connection.Open();
+
+                try
+                {
+
+                    createCommand.ExecuteNonQuery();
+
+                } 
+                catch(Exception ex)
+                {
+
+                    deleteCommand.ExecuteNonQuery();
+                    createCommand.ExecuteNonQuery();
+
+                    Console.WriteLine(ex);
+
+                }
+                
+                dataAdapter.AcceptChangesDuringFill = true;
+                dataAdapter.Fill(table);
+                dataAdapter.Update(table);
+            }
+            
+
+        }
+
         //Returns an array containing table names for each of the tables in the hopefully existing access file (usually called to populate comboboxes)
         public string[] getTableNames(string filePath)
         {
