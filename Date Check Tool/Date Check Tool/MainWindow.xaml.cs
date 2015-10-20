@@ -133,7 +133,7 @@ namespace Date_Check_Tool
 
                     DataRow currentRow = outTable.NewRow();
                     currentRow["STNID"] = stnId;
-                    currentRow["WISLRID"] = stnId;
+                    currentRow["WISLRID"] = wislrId;
                     currentRow["END_VALID"] = endValid;
                     currentRow["START_VALID"] = startValid;
                     outTable.Rows.Add(currentRow);
@@ -233,17 +233,22 @@ namespace Date_Check_Tool
             shouldClose = true; //The user now has permission to kill date pop so don't get mad
             Dispatcher.Invoke(() => { //We have to invoke this other stuff because its crossthreaded
 
-                MessageBox.Show("The Date Check Tool finished and found " + errorCount + " errors.");
-
-
                 if (errorCount > 0) //Don't worrry about opening the file unless we have errors
                 {
 
+                    MessageBox.Show("The Date Check Tool finished and found errors.");
+                
                     DataBaseTools dbTools = new DataBaseTools();
                     dbTools.writeToTable(outTable, filePath);
 
                     System.Diagnostics.Process.Start("msaccess.exe", filePath); //Opens the text file in notepad
                     System.Diagnostics.Process.Start("notepad.exe", "output.txt"); //Opens the text file in notepad
+
+                }
+                else
+                {
+
+                    MessageBox.Show("The Date Check Tool finished and found no errors.");
 
                 }
 
