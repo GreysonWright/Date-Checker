@@ -1,4 +1,3 @@
-﻿//This does nothing like Matt Yorks DateTools library for iOS that several large apps use. Date tools takes 2 dates in (as strings) and returns the latest date of the 2.
 
 using System;
 
